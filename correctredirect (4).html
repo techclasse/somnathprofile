@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Redirect</title>
+    <script>
+        function redirectByLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    // Check for Haryana (latitude: ~29, longitude: ~76)
+                    if (latitude >= 28.4 && latitude <= 30.5 && longitude >= 74 && longitude <= 77) {
+                        window.location.href = "https://techwarezen.com/";
+                    } 
+                    // Check for Maharashtra (latitude: ~15.6 - 22, longitude: ~72.6 - 80.9)
+                    else if (latitude >= 15.6 && latitude <= 22 && longitude >= 72.6 && longitude <= 80.9) {
+                        window.location.href = "https://www.flipkart.com/";
+                    }
+                    // Check for Uttar Pradesh (latitude: ~22 - 26, longitude: ~74 - 82)
+                    else if (latitude >= 23 && latitude <= 31 && longitude >= 77 && longitude <= 84) {
+                        window.location.href = "https://www.javatpoint.com/";
+                    }
+                    // Default if no location matches
+                    else {
+                        window.location.href = "#";
+                    }
+                }, function(error) {
+                    console.error("Error getting location: " + error.message);
+                    window.location.href = "#";
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+                window.location.href = "#";
+            }
+        }
+
+        // Run the function on page load
+        window.onload = redirectByLocation;
+    </script>
+</head>
+<body>
+    <p>Redirecting based on your location...</p>
+</body>
+</html>
